@@ -1,0 +1,1 @@
+ALTER TABLE "best-book-store-nextjs-ap-project_book" ADD COLUMN "image_url" varchar(255);
