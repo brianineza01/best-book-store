@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1737968524122,
+      "tag": "0000_perpetual_magus",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738712037142,
+      "tag": "0001_lonely_machine_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738825283657,
+      "tag": "0002_young_prism",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1738827179757,
+      "tag": "0003_productive_wilson_fisk",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1740728329221,
+      "tag": "0004_real_titanium_man",
+      "breakpoints": true
+    }
+  ]
+}

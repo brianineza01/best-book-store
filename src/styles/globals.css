@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: 210 33% 98%; /* seasalt */
+    --foreground: 210 33% 20%; /* onyx */
+    --card: 210 33% 98%; /* seasalt */
+    --card-foreground: 210 33% 20%; /* onyx */
+    --popover: 210 33% 98%; /* seasalt */
+    --popover-foreground: 210 33% 20%; /* onyx */
+    --primary: 210 33% 25%; /* outer_space */
+    --primary-foreground: 210 33% 98%; /* seasalt */
+    --secondary: 210 10% 90%; /* platinum */
+    --secondary-foreground: 210 33% 25%; /* outer_space */
+    --muted: 210 10% 85%; /* french_gray */
+    --muted-foreground: 210 10% 45%; /* slate_gray */
+    --accent: 210 10% 85%; /* french_gray */
+    --accent-foreground: 210 33% 25%; /* outer_space */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 33% 98%; /* seasalt */
+    --border: 210 10% 80%; /* french_gray */
+    --input: 210 10% 80%; /* french_gray */
+    --ring: 210 33% 25%; /* outer_space */
+    --chart-1: 210 33% 25%; /* outer_space */
+    --chart-2: 210 10% 74%; /* french_gray */
+    --chart-3: 210 10% 85%; /* french_gray */
+    --chart-4: 210 33% 40%; /* slate_gray */
+    --chart-5: 210 10% 60%; /* slate_gray */
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 210 33% 15%; /* eerie_black */
+    --foreground: 210 33% 98%; /* seasalt */
+    --card: 210 33% 15%; /* eerie_black */
+    --card-foreground: 210 33% 98%; /* seasalt */
+    --popover: 210 33% 15%; /* eerie_black */
+    --popover-foreground: 210 33% 98%; /* seasalt */
+    --primary: 210 33% 90%; /* anti-flash_white */
+    --primary-foreground: 210 33% 15%; /* eerie_black */
+    --secondary: 210 33% 25%; /* outer_space */
+    --secondary-foreground: 210 33% 98%; /* seasalt */
+    --muted: 210 33% 25%; /* outer_space */
+    --muted-foreground: 210 10% 74%; /* french_gray */
+    --accent: 210 33% 25%; /* outer_space */
+    --accent-foreground: 210 33% 98%; /* seasalt */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 33% 98%; /* seasalt */
+    --border: 210 33% 25%; /* outer_space */
+    --input: 210 33% 25%; /* outer_space */
+    --ring: 210 10% 85%; /* french_gray */
+    --chart-1: 210 33% 90%; /* anti-flash_white */
+    --chart-2: 210 10% 74%; /* french_gray */
+    --chart-3: 210 33% 40%; /* slate_gray */
+    --chart-4: 210 10% 60%; /* slate_gray */
+    --chart-5: 210 33% 25%; /* outer_space */
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
