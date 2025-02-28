@@ -7,9 +7,17 @@ import SearchInput from "./SearchInput";
 import { useBookData } from "@/components/BookList/useBookData";
 
 import React, { Suspense } from "react";
+import { CategoriesDropdown } from "@/components/CategoriesDropdown";
 
 const BooksWithSearch = () => {
-  const { books, isPending, searchQuery, setSearchQuery } = useBookData();
+  const {
+    books,
+    isPending,
+    searchQuery,
+    setSearchQuery,
+    categoryId,
+    setCategoryId,
+  } = useBookData();
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
@@ -19,6 +27,12 @@ const BooksWithSearch = () => {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
+
+          <CategoriesDropdown
+            categoryId={categoryId}
+            setCategoryId={setCategoryId}
+          />
+
           <AddBookPopup />
         </div>
       </div>

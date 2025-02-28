@@ -2,7 +2,7 @@ import { db } from "@/server/db";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { books } from "@/server/db/schema";
 import { z } from "zod";
-import { eq, ilike } from "drizzle-orm";
+import { and, eq, ilike } from "drizzle-orm";
 
 const bookRouter = createTRPCRouter({
   getAll: publicProcedure
@@ -10,14 +10,20 @@ const bookRouter = createTRPCRouter({
       z
         .object({
           searchQuery: z.string().optional(),
+          categoryId: z.number().optional(),
         })
         .optional(),
     )
     .query(({ input }) => {
+      const whereFilters = [];
+      if (input?.searchQuery) {
+        whereFilters.push(ilike(books.title, `%${input.searchQuery}%`));
+      }
+      if (input?.categoryId) {
+        whereFilters.push(eq(books.categoryId, input.categoryId));
+      }
       return db.query.books.findMany({
-        where: input?.searchQuery
-          ? ilike(books.title, `%${input.searchQuery}%`)
-          : undefined,
+        where: whereFilters.length > 0 ? and(...whereFilters) : undefined,
       });
     }),
   create: publicProcedure
@@ -77,6 +83,12 @@ const bookRouter = createTRPCRouter({
 
   deleteById: publicProcedure.input(z.number()).mutation(({ input }) => {
     return db.delete(books).where(eq(books.id, input));
+  }),
+
+  getByCategoryId: publicProcedure.input(z.number()).query(({ input }) => {
+    return db.query.books.findMany({
+      where: eq(books.categoryId, input),
+    });
   }),
 });
 

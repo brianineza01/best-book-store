@@ -4,7 +4,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 
 export const useBookData = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [categoryId, setCategoryId] = useState<number | null>(null);
   const debouncedSearchQuery = useDebounce(searchQuery, 50);
 
   const {
@@ -12,10 +12,23 @@ export const useBookData = () => {
     isLoading,
     refetch,
   } = api.book.getAll.useQuery(
-    searchQuery ? { searchQuery: debouncedSearchQuery } : undefined,
+    searchQuery || categoryId
+      ? {
+          ...(searchQuery && { searchQuery: debouncedSearchQuery }),
+          ...(categoryId && { categoryId }),
+        }
+      : undefined,
     {
       refetchOnMount: false,
     },
   );
-  return { books, isPending: isLoading, searchQuery, setSearchQuery, refetch };
+  return {
+    books,
+    isPending: isLoading,
+    searchQuery,
+    setSearchQuery,
+    categoryId,
+    setCategoryId,
+    refetch,
+  };
 };
