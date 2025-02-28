@@ -29,6 +29,7 @@ const bookRouter = createTRPCRouter({
         pages: z.number(),
         categoryId: z.number(),
         imageUrl: z.string().optional(),
+        about: z.string().optional(),
       }),
     )
     .mutation(({ input }) => {
@@ -55,6 +56,27 @@ const bookRouter = createTRPCRouter({
     return db.query.books.findMany({
       where: ilike(books.title, `%${input}%`),
     });
+  }),
+
+  editBookById: publicProcedure
+    .input(
+      z.object({
+        id: z.number(),
+        title: z.string().optional(),
+        imageUrl: z.string().optional(),
+        categoryId: z.number().optional(),
+        author: z.string().optional(),
+        published: z.date().optional(),
+        pages: z.number().optional(),
+        about: z.string().optional(),
+      }),
+    )
+    .mutation(({ input }) => {
+      return db.update(books).set(input).where(eq(books.id, input.id));
+    }),
+
+  deleteById: publicProcedure.input(z.number()).mutation(({ input }) => {
+    return db.delete(books).where(eq(books.id, input));
   }),
 });
 

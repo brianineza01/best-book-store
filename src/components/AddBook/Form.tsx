@@ -15,12 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 import { z } from "zod";
 import { CategoriesDropdown } from "../FormFields/CategoriesDropdown";
 import { api } from "@/trpc/react";
 import { UploadDropzone } from "@/utils/uploadthing";
 import Image from "next/image";
+import { useBookData } from "../BookList/useBookData";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -31,6 +33,7 @@ const formSchema = z.object({
   pages: z.number().min(1, "Pages must be at least 1"),
   categoryId: z.string().min(1, "Category is required"),
   imageUrl: z.string(),
+  about: z.string().optional(),
 });
 
 export function AddBookForm({ onSuccess }: { onSuccess: () => void }) {
@@ -43,13 +46,17 @@ export function AddBookForm({ onSuccess }: { onSuccess: () => void }) {
       pages: undefined,
       categoryId: "",
       imageUrl: "",
+      about: "",
     },
   });
+
+  const { refetch } = useBookData();
 
   const { mutate: createBook, isPending } = api.book.create.useMutation({
     onSuccess: () => {
       onSuccess();
       form.reset();
+      void refetch();
     },
   });
 
@@ -63,11 +70,14 @@ export function AddBookForm({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid grid-cols-1 gap-6 md:grid-cols-2"
+      >
         <FormField
           name="imageUrl"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="md:col-span-2">
               <FormLabel>Book Image</FormLabel>
               <FormControl>
                 {field.value ? (
@@ -154,14 +164,33 @@ export function AddBookForm({ onSuccess }: { onSuccess: () => void }) {
         <FormField
           name="categoryId"
           render={({ field }) => (
-            <FormItem className="flex flex-col">
+            <FormItem>
               <FormLabel>Category</FormLabel>
               <CategoriesDropdown field={field} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isPending}>
+        <FormField
+          name="about"
+          render={({ field }) => (
+            <FormItem className="md:col-span-2">
+              <FormLabel>About the Book</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Enter a description or summary of the book"
+                  className="min-h-[120px]"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                Provide a brief description or summary of the book
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" disabled={isPending} className="md:col-span-2">
           {isPending ? "Submitting..." : "Add Book"}
         </Button>
       </form>

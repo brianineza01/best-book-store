@@ -6,10 +6,10 @@ export function CategoryRowSkeleton() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <div className="h-8 w-48 animate-pulse rounded-md bg-gray-200" />
+        <div className="bg-platinum h-8 w-48 animate-pulse rounded-md" />
         <div className="flex items-center space-x-4">
-          <div className="h-5 w-20 animate-pulse rounded-md bg-gray-200" />
-          <div className="h-8 w-20 animate-pulse rounded-md bg-gray-200" />
+          <div className="bg-platinum h-5 w-20 animate-pulse rounded-md" />
+          <div className="bg-platinum h-8 w-20 animate-pulse rounded-md" />
         </div>
       </div>
       <div className="relative">
@@ -26,7 +26,7 @@ export function CategoryRowSkeleton() {
             {Array.from({ length: 6 }).map((_, index) => (
               <div
                 key={index}
-                className="h-[300px] w-[200px] animate-pulse rounded-lg bg-gray-200"
+                className="bg-platinum h-[300px] w-[200px] animate-pulse rounded-lg"
               />
             ))}
           </div>

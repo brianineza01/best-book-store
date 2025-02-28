@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -15,12 +13,13 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This would typically come from your auth state
-
   return (
-    <nav className="border-b">
-      <div className="mx-auto flex items-center justify-between py-3">
-        <Link href="/" className="text-xl font-bold">
+    <nav className="border-french-gray bg-seasalt dark:bg-eerie-black dark:border-outer-space">
+      <div className="container mx-auto flex items-center justify-between py-3">
+        <Link
+          href="/"
+          className="text-outer-space dark:text-seasalt text-xl font-bold"
+        >
           Best Book Store
         </Link>
 
@@ -30,19 +29,6 @@ export function Navbar() {
               <Link href={item.href}>{item.name}</Link>
             </Button>
           ))}
-        </div>
-
-        <div className="flex items-center">
-          {isLoggedIn ? (
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          ) : (
-            <Button variant="outline" onClick={() => setIsLoggedIn(true)}>
-              Login
-            </Button>
-          )}
         </div>
 
         <Sheet>
@@ -59,11 +45,6 @@ export function Navbar() {
                   <Link href={item.href}>{item.name}</Link>
                 </Button>
               ))}
-              {!isLoggedIn && (
-                <Button variant="outline" onClick={() => setIsLoggedIn(true)}>
-                  Login
-                </Button>
-              )}
             </div>
           </SheetContent>
         </Sheet>

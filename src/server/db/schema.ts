@@ -61,6 +61,7 @@ export const books = createTable("book", {
   published: timestamp("published", { mode: "date" }).notNull(),
   pages: integer("pages").notNull(),
   imageUrl: varchar("image_url", { length: 255 }),
+  about: text("about"),
   categoryId: integer("category_id")
     .notNull()
     .references(() => categories.id),

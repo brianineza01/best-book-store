@@ -7,8 +7,15 @@ export const useBookData = () => {
 
   const debouncedSearchQuery = useDebounce(searchQuery, 50);
 
-  const { data: books, isPending } = api.book.getAll.useQuery(
+  const {
+    data: books,
+    isLoading,
+    refetch,
+  } = api.book.getAll.useQuery(
     searchQuery ? { searchQuery: debouncedSearchQuery } : undefined,
+    {
+      refetchOnMount: false,
+    },
   );
-  return { books, isPending, searchQuery, setSearchQuery };
+  return { books, isPending: isLoading, searchQuery, setSearchQuery, refetch };
 };

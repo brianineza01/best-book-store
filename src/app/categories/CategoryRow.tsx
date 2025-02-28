@@ -30,12 +30,24 @@ export function CategoryRow({
     }
   };
 
+  if (books.length === 0) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">{categoryName}</h2>
+        </div>
+        <div className="flex items-center justify-center">
+          <p className="text-slate-gray text-sm">No books in this category</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">{categoryName}</h2>
         <div className="flex items-center space-x-4">
-          <p className="text-sm text-gray-500">{books.length} books</p>
+          <p className="text-slate-gray text-sm">{books.length} books</p>
           <Link href={`/categories/${categorySlug}`}>
             <Button variant="outline" size="sm">
               View All

@@ -18,11 +18,13 @@ const formSchema = z.object({
 });
 
 export function AddCategoryForm({ onSuccess }: { onSuccess: () => void }) {
+  const { refetch } = api.category.getAllWithBooks.useQuery(undefined);
   const { mutate: createCategory, isPending } = api.category.create.useMutation(
     {
       onSuccess: () => {
         onSuccess();
         form.reset();
+        void refetch();
       },
     },
   );

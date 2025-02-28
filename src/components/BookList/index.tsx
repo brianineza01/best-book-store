@@ -5,7 +5,7 @@ import BookListItem from "./BookListItem";
 
 export default function BookList({ books }: { books: Book[] }) {
   if (!books?.length) {
-    return <p className="text-center text-gray-500">No books available.</p>;
+    return <p className="text-slate-gray text-center">No books available.</p>;
   }
 
   return (

@@ -20,7 +20,7 @@ export function AddBookPopup() {
       <DialogTrigger asChild>
         <Button variant="outline">Add New Book</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-4/5 md:max-w-4xl lg:max-w-5xl">
         <DialogHeader>
           <DialogTitle>Add New Book</DialogTitle>
           <DialogDescription>
